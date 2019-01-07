@@ -1,0 +1,62 @@
+
+html, body {
+    background-color: #333030;
+    min-height: 100%;
+}
+
+body a {
+    color: #cecece;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+}
+
+html, body, h1>a, .mat-card-header-text {
+    color: #a5d6a7;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.header-image img {
+    width: 30px;
+}
+
+.card-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container .mat-card {
+    margin-top: 25px;
+    background: #424242CC;
+}
+
+body .mat-snack-bar-container {
+    background: #a5d6a7CC;
+    color: #424242;
+}
+
+.mat-card-actions {
+    text-align: right;
+}
+
+.mat-chip-list-wrapper {
+    justify-content: center;
+}
+
+body .mat-menu-panel {
+    background: url(assets/background250.png);
+    background-size: cover;
+}
+
+body .mat-menu-item {
+    color: #a5d6a7;
+}
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-app-primary: mat-palette($mat-green, 200);
+$theme: mat-dark-theme($my-app-primary, $my-app-primary);
+
+@include angular-material-theme($theme);

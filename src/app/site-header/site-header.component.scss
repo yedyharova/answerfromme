@@ -1,0 +1,33 @@
+h1 {
+    margin-bottom: 5px;
+    @media (max-width: 414px) {
+        font-size: 24px;
+    }
+}
+
+h2 {
+    margin-top: 0;
+    font-family: monospace;
+    color: #cecece;
+}
+
+h1, h2 {
+    text-shadow: 3px 3px 0px #3F3A3B;
+}
+
+ul {
+    list-style-type: none;
+    padding: 6px;
+    width: fit-content;
+    font-size: large;
+    color: #cecece;
+    text-shadow: 3px 3px 3px #3F3A3B, -3px -3px 3px #3F3A3B, 0 3px 3px #3F3A3B;
+
+    @media (max-width: 414px) {
+        font-size: 15px;
+    }
+}
+
+.provide-button {
+    float: left;
+}

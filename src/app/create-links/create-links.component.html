@@ -1,0 +1,34 @@
+<mat-card *ngFor="let link of links">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image">
+      <img [src]="link.icon" />
+    </div>
+    <mat-card-title>Via {{ link.type }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="card-form">
+      <mat-form-field>
+          <input matInput type="text" (keyup)="onChange(link)"
+            [placeholder]="link.placeholder" [formControl]="link.formControl"
+            [(ngModel)]="link.username" />
+          <mat-error *ngIf="link.formControl && link.formControl.hasError(link.errorType)">
+              {{ link.error }}
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="link.action">
+        <mat-select placeholder="Action"  [(ngModel)]="link.action" (selectionChange)="onChange(link)">
+          <mat-option *ngFor="let action of link.actions" [value]="action.type">
+            {{action.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="link.link && link.username && (!link.formControl || !link.formControl.hasError(link.errorType))">
+    <a mat-raised-button [href]="link.link" target="_blank">Try {{ link.type }} Link</a>
+    <button mat-raised-button (click)="copyLink(link)">COPY LINK</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,25 @@
+img {
+    animation: 10s linear 0s normal none infinite running rot;
+    -webkit-animation: 10s linear 0s normal none infinite running rot;
+    width: 50px;
+    margin: 20px;
+    float: left;
+}
+
+h3 {
+    margin-top: 20px;
+}
+
+h3, p {
+    text-shadow: 3px 3px 3px #3F3A3B, -3px -3px 3px #3F3A3B, 0 3px 3px #3F3A3B;
+}
+
+@keyframes rot {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@-webkit-keyframes rot {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
