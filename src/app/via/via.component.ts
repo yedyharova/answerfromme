@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LinkResolverService, Link } from '../link-resolver.service';
-import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-via',
@@ -10,23 +9,23 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ViaComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private linkResolver: LinkResolverService, public snackBar: MatSnackBar) { }
-
   link: Link;
+  name: string;
+
+  constructor(private route: ActivatedRoute, private linkResolver: LinkResolverService) { }
+
 
   ngOnInit() {
+    let paramsHash = this.linkResolver.getParamsFromLocation();
+    if (paramsHash['name']) {
+      this.name = paramsHash['name'];
+    }
     this.fillLink();
   }
 
   copyUsername(username: string) {
     this.linkResolver.copyLink(username);
-    this.openSnackBar('Data were COPIED', 'OK');
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000, horizontalPosition: 'right', verticalPosition: 'top'
-    });
+    this.linkResolver.success('Data were COPIED');
   }
 
   getActionName() {

@@ -1,12 +1,34 @@
 
-<h1><a href="/">Create link to your connect channel</a></h1>
-<h2>Invite people contact you</h2>
+<div class="permanent-header">
+  <div class="row-flex">
+      <h1><a href="/">Answer from me</a></h1>
+      <span>|</span>
+      <span>{{ getPathTitle() }}</span>
+  </div>
 
-<div dir="rtl">
-  <ul>
-    <li>Use link to your channel in PDF or Google Doc</li>
-    <li>Provide list of your channels via single hyperlink</li>
-    <li>Save all channels in your browser storage</li>
-    <li>We don't keep your info</li>
-  </ul>
+  <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item *ngIf="path !== 'create'" routerLink="/create" routerLinkActive="active">Create link to your contact channel</a>
+          <!-- <a mat-menu-item routerLink="/skills" routerLinkActive="active">Create link to your skills list</a> -->
+          <button mat-menu-item [matMenuTriggerFor]="aboutHistoryMenu">About History</button>
+          <mat-menu #aboutHistoryMenu="matMenu">
+              <a mat-menu-item [href]="aboutHistoryItem.link" *ngFor="let aboutHistoryItem of aboutHistory">{{ aboutHistoryItem.key }}</a>
+            </mat-menu>
+        </mat-menu>
+  </div>
+  
+  <a href="/help">?</a>
+  
 </div>
+
+<div class="header-info"></div>
+
+<!-- <div class="header-info" [ngSwitch]="true">
+  <div *ngSwitchCase="path === 'create'"></div>
+  <div *ngSwitchCase="path === 'about'"></div>
+  <div *ngSwitchCase="['via', 'via/:channel/:username', 'via/:channel/:username/:action'].indexOf(path)>-1"></div>
+  <div *ngSwitchDefault></div>
+</div> -->

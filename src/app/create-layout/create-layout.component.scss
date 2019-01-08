@@ -1,4 +1,15 @@
-.all-links {
-    margin: 45px 0;
-    text-align: right;
+.top-links {
+    display: flex;
+    @media (max-width: 414px) {
+        flex-direction: column;
+    }
+
+    input {
+        margin-bottom: 10px;
+        text-shadow: 2px 2px #333030;
+    }
+
+    .mat-stroked-button {
+        text-shadow: 1px 1px #333030;
+    }
 }

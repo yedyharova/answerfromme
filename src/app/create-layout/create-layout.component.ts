@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LinkResolverService, Link } from '../link-resolver.service';
-import { MatSnackBar } from '@angular/material';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'create-layout',
@@ -9,63 +9,48 @@ import { MatSnackBar } from '@angular/material';
 })
 export class CreateLayoutComponent implements OnInit {
 
-  constructor(private linkResolver: LinkResolverService, public snackBar: MatSnackBar) { }
+  name: string;
+
+  constructor(private linkResolver: LinkResolverService, private titleService: Title) { }
 
   ngOnInit() {
-    this.name = window.localStorage.getItem('name');
+    this.titleService.setTitle('Channel\'s links | Answer from me');
+    this.name = this.linkResolver.initName();
+  }
+
+  onChangeName() {
+    this.linkResolver.name = this.name;
   }
 
   tryAllLink() {
-    let link = this.createAllLinkFromStorage();
+    let link = this.linkResolver.createAllLinkFromStorage();
     if (link) {
       window.open(link);
     } else {
-      this.openSnackBar('Data is EMPTY. Link was not COPIED.', 'OK');
+      this.linkResolver.warn('Data is EMPTY');
     }
   }
 
   copyAllLink() {
-    let link = this.createAllLinkFromStorage();
-    let message = 'Data is EMPTY. Link was not COPIED.';
+    let link = this.linkResolver.createAllLinkFromStorage();
+    let message = 'Data is EMPTY';
     if (link) {
       this.linkResolver.copyLink(link);
-      message = 'Link was COPIED.'
+      this.linkResolver.success('Link was COPIED');
+    } else {
+      this.linkResolver.warn('Data is EMPTY');
     }
-    this.openSnackBar(message, 'OK');
   }
 
-  setName() {
-    window.localStorage.setItem('name', this.name);
-  }
-
-  name: string;
-
-  createAllLinkFromStorage():string {
-    let links:Array<Link> = this.linkResolver.links;
-    let secondPart = '';
-    if (this.name) {
-      secondPart += `name=${this.name}`;
+  copyHtmlAllLink() {
+    let link = this.linkResolver.createAllLinkFromStorage();
+    if (link) {
+      let htmlLink = `<a href=${link}>${this.name || 'The person'} contacts</a>`;
+      this.linkResolver.copyLink(htmlLink);
+      this.linkResolver.success('HTML Link code was COPIED');
+    } else {
+      this.linkResolver.warn('Data is EMPTY');
     }
-    links.forEach(link => {
-      let storedData = window.localStorage.getItem(link.channel);
-      if (storedData) {
-        let storedObj = JSON.parse(storedData);
-        if (storedObj.username) {
-          if (secondPart.length) secondPart += '&';
-          secondPart += `${link.channel}=${encodeURIComponent(storedObj.username)}`;
-        }
-      }
-    });
-    if (secondPart.length) {
-      return `${window.location.protocol}//${window.location.host}/about?${secondPart}`;
-    }
-    return null;
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000, horizontalPosition: 'right', verticalPosition: 'top'
-    });
   }
 
 }

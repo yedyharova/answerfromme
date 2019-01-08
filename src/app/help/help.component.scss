@@ -1,0 +1,19 @@
+img {
+    border: solid;
+    width: 300px;
+    cursor: zoom-in;
+}
+
+img.full {
+    width: 100%;
+    cursor: zoom-out;
+}
+
+mat-panel-title {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mat-expansion-panel {
+    background: #424242CC;
+}

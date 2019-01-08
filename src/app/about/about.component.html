@@ -1,35 +1,41 @@
-<a mat-stroked-button color="primary" class="provide-button" href="/">Home</a>
-<h1>{{ name }} CONTACTS:</h1>
+<site-header></site-header>
+<h1>{{ name }}</h1>
 
-<mat-card *ngFor="let link of links">
-    <mat-card-header>
-      <div mat-card-avatar class="header-image">
-        <img [src]="link.icon" />
-      </div>
-      <mat-card-title>{{ link.type }}</mat-card-title>
-    </mat-card-header>
-  
-    <mat-card-content>
-      <div class="card-form">
+<div class="about-container">
+ 
+  <ng-container *ngFor="let link of links">
+      <mat-card *ngIf="link.username">
+          <mat-card-header>
+            <div mat-card-avatar class="header-image">
+              <img [src]="link.icon" />
+            </div>
+            <mat-card-title>{{ link.type }}</mat-card-title>
+          </mat-card-header>
+        
+          <mat-card-content>
+            <div class="card-form">
+      
+              <mat-chip-list class="mat-chip-list-stacked">
+                  <mat-chip class="copy" (click)="copyUsername(link.username)">
+                      {{ link.username }}
+                  </mat-chip>
+              </mat-chip-list>
+        
+              <mat-form-field [hidden]="!link.action">
+                <mat-select placeholder="Action" [(ngModel)]="link.action" (selectionChange)="onChange(link)">
+                  <mat-option *ngFor="let action of link.actions" [value]="action.type">
+                    {{action.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        
+          <mat-card-actions [hidden]="!link.link || !link.safeLink || !link.username ">
+            <a mat-raised-button color="warn" [href]="link.safeLink" target="_blank">{{ link.action && getActionName(link) || 'Contact via ' + link.type }}</a>
+          </mat-card-actions>
+      </mat-card>
+  </ng-container>
 
-        <mat-chip-list class="mat-chip-list-stacked">
-            <mat-chip (click)="copyUsername(link.username)">
-                {{ link.username }}
-            </mat-chip>
-        </mat-chip-list>
-  
-        <mat-form-field *ngIf="link.action">
-          <mat-select placeholder="Action" [(ngModel)]="link.action" (selectionChange)="onChange(link)">
-            <mat-option *ngFor="let action of link.actions" [value]="action.type">
-              {{action.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </mat-card-content>
-  
-    <mat-card-actions *ngIf="link.link || link.safeLink && link.username ">
-      <a mat-raised-button [href]="link.safeLink" target="_blank">Contact via {{ link.type }}</a>
-      <button mat-raised-button (click)="copyLink(link)">COPY LINK</button>
-    </mat-card-actions>
-</mat-card>
+ 
+</div>

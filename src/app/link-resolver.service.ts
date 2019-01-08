@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { SafeUrl } from '@angular/platform-browser';
-
-//skype:yedyharova?chat  
-//tg:resolve?domain=Yedyharova
-//tel:+1234567890
-//mailto:yedyharovaolena@gmail.com
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +16,7 @@ export class LinkResolverService {
     placeholder: 'Username *',
     actions: [ 
       { name: 'Call Me', type: 'call' },
-      { name: 'My User Info', type: 'userinfo' },
-      { name: 'Add Me', type: 'add' },
-      { name: 'Chat Me', type: 'chat' },
-      { name: 'Send Me Voicemail', type: 'voicemail' }
+      { name: 'Chat Me', type: 'chat' }
     ],
     action: 'chat',
     formControl: new FormControl('', [
@@ -112,7 +105,108 @@ export class LinkResolverService {
     document.body.removeChild(selBox);
   }
 
-  constructor() {
+  private _name: string;
+
+  get name() {
+    return this._name;
+  }
+
+  set name(theName: string) {
+    this._name = theName;
+    window.localStorage.setItem('name', this.name);
+  }
+
+  initName():string {
+    this._name = window.localStorage.getItem('name');
+    return this.name;
+  }
+
+  createAllLinkFromStorage():string {
+    let search = '';
+    this.links.forEach(link => {
+      let storedData = window.localStorage.getItem(link.channel);
+      if (storedData) {
+        let storedObj = JSON.parse(storedData);
+        if (storedObj.username) {
+          if (search.length) search += '&';
+          search += `${link.channel}=${encodeURIComponent(storedObj.username)}`;
+        }
+      }
+    });
+    if (search.length) {
+      if (this.name) {
+        search = `name=${encodeURIComponent(this.name)}&` + search;
+      }
+      return `${window.location.protocol}//${window.location.host}/about?${search}`;
+    }
+    return null;
+  }
+
+  getParamsFromLocation():object {
+    let search = window.location.search.split(/\&|\?/gm);
+    let paramsHash = {};
+    search.forEach(term => {
+      let parts = term.split('=');
+      if (parts && parts.length > 1) {    
+        paramsHash[parts[0]] = decodeURIComponent(parts[1]);   
+      }
+    });
+    return paramsHash;
+  }
+
+  setAboutHistory(name: string) {
+    let date = new Date();
+    let key = `about: ${name}`;
+    let value = {date: date, link: window.location.href};
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  getAboutHistory():Array<any> {
+    let aboutStorage = [];
+    for (let key in window.localStorage) {
+      if (window.localStorage.hasOwnProperty(key)) {
+        if (key.indexOf('about: ') === 0) {
+          let value = JSON.parse(localStorage.getItem(key));
+          aboutStorage.push({key: key.substr(6, key.length), date: value.date, link: value.link});
+        }
+      }
+    }
+
+    aboutStorage.sort((about1, about2) => {
+      let date1= about1.date.toUpperCase();
+      let date2 = about2.date.toUpperCase();
+      if (date1 < date2) return -1;
+      if (date1 > date2) return 1;
+      return 0;
+    });
+
+    if (aboutStorage.length > 5) {
+      let count = aboutStorage.length - 5;
+      while (count) {
+        let elem = aboutStorage.shift();
+        window.localStorage.removeItem(`about: ${elem.key}`);
+        count--;
+      }
+    }
+    aboutStorage.reverse();
+    return aboutStorage;
+  }
+
+  snackBarConfig:object = {
+    duration: 3000, horizontalPosition: 'right', verticalPosition: 'top'
+  };
+
+  snackBarAction: string = 'Ok';
+
+  warn(message: string) {
+    this.snackBar.open(message, this.snackBarAction, { ...this.snackBarConfig, ...{panelClass: 'warn'} });
+  }
+
+  success(message: string) {
+    this.snackBar.open(message, this.snackBarAction, this.snackBarConfig);
+  }  
+
+  constructor(public snackBar: MatSnackBar) {
     this.links.forEach(link => this.linksHash[link.channel] = link);
   }
 }

@@ -7,27 +7,44 @@ h1 {
 
 h2 {
     margin-top: 0;
-    font-family: monospace;
     color: #cecece;
-}
-
-h1, h2 {
-    text-shadow: 3px 3px 0px #3F3A3B;
-}
-
-ul {
-    list-style-type: none;
-    padding: 6px;
-    width: fit-content;
-    font-size: large;
-    color: #cecece;
-    text-shadow: 3px 3px 3px #3F3A3B, -3px -3px 3px #3F3A3B, 0 3px 3px #3F3A3B;
-
-    @media (max-width: 414px) {
-        font-size: 15px;
-    }
 }
 
 .provide-button {
     float: left;
+}
+
+.permanent-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background: #424242CC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.permanent-header h1 {
+    font-size: 18px;
+}
+
+.permanent-header .row-flex span:last-child {
+    font-size: 13px;
+    color: #cecece;
+}
+
+.row-flex>*,
+.permanent-header>* {
+    margin: 0 10px;
+}
+
+.row-flex {
+    display: flex;
+    align-items: center;
+}
+
+.header-info {
+    margin-top: 20px;
 }

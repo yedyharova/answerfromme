@@ -13,7 +13,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 import { CreateLayoutComponent } from './create-layout/create-layout.component';
@@ -22,6 +23,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ViaComponent } from './via/via.component';
 import { SiteHeaderComponent } from './site-header/site-header.component';
 import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { AboutComponent } from './about/about.component';
     PageNotFoundComponent,
     ViaComponent,
     SiteHeaderComponent,
-    AboutComponent
+    AboutComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { AboutComponent } from './about/about.component';
     MatChipsModule,
     MatSnackBarModule,
     MatMenuModule,
-    MatToolbarModule
+    MatIconModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

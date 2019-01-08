@@ -7,13 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  get pathName() {
-    return window.location.pathname;
-  }
+  pathName: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.pathName = window.location.pathname;
   }
 
 }

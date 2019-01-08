@@ -1,0 +1,69 @@
+<site-header></site-header>
+
+<h1><a href="/">Create link to your connect channel</a></h1>
+<h2>Invite people contact you via skype, email or phone</h2>
+<h3>Use the link to your channel in PDF, Google Doc or Email Template</h3>
+
+<mat-accordion>
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            <mat-icon>build</mat-icon><h3>What problem this service solves?</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      
+      <p>A lot of text processors like Google Docs, Microsoft Word etc, allows use hyperlinks, but they can not open application like browser can.</p>
+      <p>If you want use applications links in your documents it can be impossible.</p>
+      <img src="../../assets/googleDocLinkTypo.jpg" [ngClass]="{'full' : preview[1]}" (click)="togglePreview(1)" />
+      <p>Also as example not all email clients allow links to skype call - skype:username?call.</p>
+      <img src="../../assets/googleEmailLinkEdition.jpg" [ngClass]="{'full' : preview[2]}" (click)="togglePreview(2)"/>
+      <p>Even if the link will be inserted in the email - it likely will be transformed into plain text when the email opened by the recipient.</p>
+  
+      <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            <mat-icon>info</mat-icon><h3>How to use this service</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>You just need <a href="/" target="_blank">fill simple form</a> to get the link: try it, copy or generate HTML code to use in templates.</p>
+      <img src="../../assets/form.jpg" [ngClass]="{'full' : preview[3]}" (click)="togglePreview(3)"/>
+
+  
+      <p>You can provide list of your channels via single hyperlink or use different links for any channel.</p>
+        
+      <p>By click on the link your recipients will see web page in browser and can copy provided data or tap action button to use skype, email client or to call a number on a phone-capable device</p>
+      <img src="../../assets/singleLink.jpg" [ngClass]="{'full' : preview[4]}" (click)="togglePreview(4)"/>
+      <img src="../../assets/linkToChannel.jpg" [ngClass]="{'full' : preview[5]}" (click)="togglePreview(5)"/>
+
+      <p>Browser storage keep history of browsed data</p>
+      <img src="../../assets/history.jpg" [ngClass]="{'full' : preview[6]}" (click)="togglePreview(6)"/>
+
+      <p>This service has no server side logic. It does not keep your info. It is just redirect browser application.</p>
+
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            <mat-icon>email</mat-icon><h3>Ask any question or request other functionality</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <p><a href="mailto:admin@answerfrom.me">Email Us:</a> admin@answerfrom.me </p>
+  
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">End</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  
+  </mat-accordion>

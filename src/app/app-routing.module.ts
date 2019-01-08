@@ -5,10 +5,12 @@ import { CreateLayoutComponent } from './create-layout/create-layout.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ViaComponent } from './via/via.component';
 import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 const routes: Routes = [
   { path: 'create', component: CreateLayoutComponent},
   { path: 'about', component: AboutComponent},
+  { path: 'help', component: HelpComponent},
   { path: 'via', component: ViaComponent},
   { path: 'via/:channel/:username', component: ViaComponent}, 
   { path: 'via/:channel/:username/:action', component: ViaComponent},  

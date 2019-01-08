@@ -1,23 +1,24 @@
 <site-header></site-header>
+<h1>{{ name }}</h1>
 
-<mat-card>
+<mat-card *ngIf="link">
   <mat-card-header>
     <div mat-card-avatar class="header-image">
       <img [src]="link.icon" />
     </div>
-    <mat-card-title>Contact person via {{ link.type }}:</mat-card-title>
+    <mat-card-title>{{ link.type }}</mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
     <div class="card-form">
       <mat-chip-list>
-        {{ link.action && getActionName() }} <mat-chip color="primary" selected (click)="copyUsername(link.username)">{{ link.username }}</mat-chip>
+        {{ link.action && getActionName() }} <mat-chip class="copy" color="primary" selected (click)="copyUsername(link.username)">{{ link.username }}</mat-chip>
       </mat-chip-list>
       
     </div>
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button (click)="openLink()">{{ link.action && getActionName() || 'Contact via ' + link.type}}</button>
+    <button mat-raised-button color="warn" (click)="openLink()">{{ link.action && getActionName() || 'Contact via ' + link.type}}</button>
   </mat-card-actions>
 </mat-card>

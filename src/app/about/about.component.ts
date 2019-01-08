@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LinkResolverService, Link } from '../link-resolver.service';
-import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-about',
@@ -11,54 +9,52 @@ import { MatSnackBar } from '@angular/material';
 })
 export class AboutComponent implements OnInit {
 
-  constructor(private linkResolver: LinkResolverService, private sanitizer: DomSanitizer, public snackBar: MatSnackBar) { 
-    this.links = linkResolver.links;
-    let search = window.location.search.split(/\&|\?/gm);
-    let paramsHash = {};
-    search.forEach(term => {
-      let parts = term.split('=');
-      if (parts && parts.length > 1) {
-        if (parts[0] === 'name') {
-          this.name = decodeURIComponent(parts[1]);
-        } else {
-          paramsHash[parts[0]] = decodeURIComponent(parts[1]);
-        }        
-      }
-    });
+  
+  name: string;
+  links: Array<Link>;
 
+  constructor(private linkResolver: LinkResolverService, private sanitizer: DomSanitizer) { }
+
+  ngOnInit() {
+    this.links = this.linkResolver.links;
+    let paramsHash = this.linkResolver.getParamsFromLocation();
+    if (paramsHash['name']) {
+      this.name = paramsHash['name'];
+    }
+    
     this.links.forEach(link => {
       link.username = paramsHash[link.channel];
       link.link = this.linkResolver.evalLink(link);
       link.safeLink = this.sanitizer.bypassSecurityTrustUrl(this.linkResolver.evalLink(link));
     });
 
+    this.linkResolver.setAboutHistory(this.name || 'anonymous');
+  }
+
+  getActionName(link:Link) {
+    let actionName = '';
+    if (link.action) {
+      link.actions.forEach(action => {
+          if (action.type === link.action) {
+            actionName = action.name;
+          }
+      })
+    }
+    return actionName;
   }
 
   onChange(linkObj: Link) {
     linkObj.link = this.linkResolver.evalLink(linkObj);
+    linkObj.safeLink = this.sanitizer.bypassSecurityTrustUrl(this.linkResolver.evalLink(linkObj));
   }
 
   copyLink(link: Link) {
     this.linkResolver.copyLink(link.link);
-    this.openSnackBar('Link was COPIED', 'OK');
+    this.linkResolver.success('Link was COPIED');
   }
 
   copyUsername(username) {
     this.linkResolver.copyLink(username);
-    this.openSnackBar('Data were COPIED', 'OK');
+    this.linkResolver.success('Data were COPIED');
   }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000, horizontalPosition: 'right', verticalPosition: 'top'
-    });
-  }
-
-  name: string;
-
-  links: Array<Link>;
-
-  ngOnInit() {
-  }
-
 }
