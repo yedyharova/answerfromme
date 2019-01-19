@@ -29,7 +29,7 @@ export class LinkResolverService {
   telegramLink: Link = {
     type: 'Telegram', 
     channel: 'tg',
-    linkFormat: '${l.channel}:resolve?domain=${l.username}',
+    linkFormat: '${l.channel}://resolve?domain=${l.username}',
     icon: 'assets/telegram.png',       
     placeholder: 'Username *',
     formControl: new FormControl('', [
@@ -71,7 +71,7 @@ export class LinkResolverService {
   };
 
   get links(): Array<Link> {
-    return [this.skypeLink/*, this.telegramLink*/, this.emailLink, this.phoneLink];
+    return [this.skypeLink, this.telegramLink, this.emailLink, this.phoneLink];
   }
 
   private linksHash: object = {};

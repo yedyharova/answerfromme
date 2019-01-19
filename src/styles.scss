@@ -13,7 +13,7 @@ a, a:hover, a:focus, a:active {
 }
 
 html, body, h1>a, .mat-card-header-text {
-    color: #a5d6a7;
+    color: #ffe082;
     font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
     
 }
@@ -31,13 +31,18 @@ body *, body .mat-card-title {
     flex-direction: column;
 }
 
+body .mat-menu-content,
+.main-container .mat-stroked-button,
 .main-container .mat-card {
-    margin-top: 25px;
     background: #424242CC;
 }
 
+.main-container .mat-card {
+    margin-top: 25px;
+}
+
 body .mat-snack-bar-container {
-    background: #a5d6a7CC;
+    background: #fffde7CC;
     color: #424242;
 }
 
@@ -61,7 +66,7 @@ body .mat-menu-panel {
 }
 
 body .mat-menu-item {
-    color: #a5d6a7;
+    color: #ffe082;
 }
 
 body .mat-menu-item.active {
@@ -88,7 +93,7 @@ mat-form-field[hidden] {
 @import '~@angular/material/theming';
 @include mat-core();
 
-$my-app-primary: mat-palette($mat-green, 200);
+$my-app-primary: mat-palette($mat-amber, 200);
 $theme: mat-dark-theme($my-app-primary, $my-app-primary);
 
 @include angular-material-theme($theme);
