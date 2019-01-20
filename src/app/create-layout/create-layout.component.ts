@@ -21,7 +21,7 @@ export class CreateLayoutComponent implements OnInit {
     this.checkNameInputClass();
   }
 
-  onChangeName($event: any) {
+  onChangeName() {
     this.linkResolver.name = this.name;
     this.checkNameInputClass();    
   }
