@@ -12,7 +12,28 @@
         // text-shadow: 2px 2px #333030;
     }
 
+    input.length25 {
+        font-size: larger;
+    }
+
+    input.length30 {
+        font-size: large;
+    }
+
+    input.length35 {
+        font-size: medium;
+    }
+
+    input.length40 {
+        font-size: small;
+    }
+
+    input.length45 {
+        font-size: smaller;
+    }
+
     .mat-stroked-button {
         text-shadow: 1px 1px #333030;
     }
 }
+

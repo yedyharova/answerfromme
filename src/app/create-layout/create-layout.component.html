@@ -1,11 +1,11 @@
 <site-header></site-header>
 <div class="links">
   <div class="top-links">
-      <input matInput type="text" (keyup)="onChangeName()" placeholder="Type Your Name" [(ngModel)]="name" />
+      <input #nameInput matInput type="text" (keyup)="onChangeName()" placeholder="Type Your Name" [(ngModel)]="name" />
       <div>
         <button mat-stroked-button class="provide-button" [matMenuTriggerFor]="menu">Provide all this info via single hyperlink</button>
         <mat-menu #menu="matMenu" [xPosition]="'before'">
-          <button mat-menu-item (click)="tryAllLink()">Try</button>
+          <button mat-menu-item (click)="tryAllLink()">Preview</button>
           <button mat-menu-item (click)="copyAllLink()">Copy</button>
           <button mat-menu-item (click)="copyHtmlAllLink()">COPY HTML Code</button>
         </mat-menu>

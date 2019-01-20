@@ -29,7 +29,7 @@
     </mat-card-content>
 
     <mat-card-actions [hidden]="!link.link || !link.username || (link.formControl && link.formControl.hasError(link.errorType))">
-      <button mat-raised-button (click)="tryLink(link)">Try</button>
+      <button mat-raised-button (click)="tryLink(link)">Preview</button>
       <button mat-raised-button (click)="copyLink(link)">Copy</button>
       <button mat-raised-button (click)="copyHtmlLink(link)">Copy HTML</button>
     </mat-card-actions>
