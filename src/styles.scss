@@ -90,6 +90,15 @@ mat-form-field[hidden] {
     visibility: hidden;
 }
 
+body .mat-card-title h1 {
+    font-size: large;
+    margin-top: 0;
+}
+
+body .mat-card-image {
+    opacity: 0.4;
+}
+
 @import '~@angular/material/theming';
 @include mat-core();
 

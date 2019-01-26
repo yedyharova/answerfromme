@@ -12,6 +12,7 @@ export class AboutComponent implements OnInit {
   
   name: string;
   links: Array<Link>;
+  isPageAboutUser: boolean = false;
 
   constructor(private linkResolver: LinkResolverService, private sanitizer: DomSanitizer) { }
 
@@ -24,6 +25,7 @@ export class AboutComponent implements OnInit {
     
     this.links.forEach(link => {
       link.username = paramsHash[link.channel];
+      this.isPageAboutUser = !!link.username;
       link.link = this.linkResolver.evalLink(link);
       link.safeLink = this.sanitizer.bypassSecurityTrustUrl(this.linkResolver.evalLink(link));
     });

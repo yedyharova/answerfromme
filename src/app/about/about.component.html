@@ -1,7 +1,7 @@
 <site-header></site-header>
 <h1>{{ name }}</h1>
 
-<div class="about-container">
+<div class="about-container" *ngIf="isPageAboutUser">
  
   <ng-container *ngFor="let link of links">
       <mat-card *ngIf="link.username">
@@ -31,11 +31,33 @@
             </div>
           </mat-card-content>
         
-          <mat-card-actions [hidden]="!link.link || !link.safeLink || !link.username ">
+          <mat-card-actions [hidden]="!link.link || !link.safeLink || !link.username">
             <a mat-raised-button color="warn" [href]="link.safeLink" target="_blank">{{ link.action && getActionName(link) || 'Contact via ' + link.type }}</a>
           </mat-card-actions>
       </mat-card>
   </ng-container>
 
  
+</div>
+
+<div *ngIf="!isPageAboutUser">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="header-image">
+        <img src="assets/answersfromme.png" />
+      </div>
+      <mat-card-title><h1><a routerLink="/create">answerfrom.me</a><small> is a service for sharing your contacts</small></h1></mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="assets/road.jpg" />
+    <mat-card-content>
+      <p>Use browser functionality to allow your addressees start conversation with you in a two clicks.</p>
+      <p>Put nice link to you in email, pdf or Google Docs.</p>
+      <p>Create all-in-one page to allow your addressees choose preferable contact channel to you: skype, email, telegram or phone.</p>
+      
+    </mat-card-content>
+  
+    <mat-card-actions >
+      <a mat-button color="primary" routerLink="/create">Try. It is free.</a>
+    </mat-card-actions>
+</mat-card>
 </div>
