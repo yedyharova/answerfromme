@@ -118,7 +118,7 @@ export class LinkResolverService {
 
   initName():string {
     this._name = window.localStorage.getItem('name');
-    return this.name;
+    return this.name || '';
   }
 
   createAllLinkFromStorage():string {
