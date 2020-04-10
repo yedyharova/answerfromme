@@ -1,73 +1,64 @@
-import { Injectable } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { SafeUrl } from '@angular/platform-browser';
-import { MatSnackBar } from '@angular/material';
+import { Injectable } from "@angular/core";
+import { FormControl, Validators } from "@angular/forms";
+import { SafeUrl } from "@angular/platform-browser";
+import { MatSnackBar } from "@angular/material";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class LinkResolverService {
-
-  skypeLink: Link = { 
-    type: 'Skype',
-    channel: 'skype',
-    linkFormat: '${l.channel}:${l.username}?${l.action}',
-    icon: 'assets/skype.png',
-    placeholder: 'Username *',
-    actions: [ 
-      { name: 'Call Me', type: 'call' },
-      { name: 'Chat Me', type: 'chat' }
+  skypeLink: Link = {
+    type: "Skype",
+    channel: "skype",
+    linkFormat: "${l.channel}:${l.username}?${l.action}",
+    icon: "assets/skype.png",
+    placeholder: "Username *",
+    actions: [
+      { name: "Call Me", type: "call" },
+      { name: "Chat Me", type: "chat" },
     ],
-    action: 'chat',
-    formControl: new FormControl('', [
-      Validators.pattern('[a-zA-Z0-9_-]*')
-    ]),
-    errorType: 'pattern',
-    error: 'Wrong Username'
+    action: "chat",
+    formControl: new FormControl("", [Validators.pattern("[a-zA-Z0-9_-]*")]),
+    errorType: "pattern",
+    error: "Wrong Username",
   };
 
   telegramLink: Link = {
-    type: 'Telegram', 
-    channel: 'tg',
-    linkFormat: '${l.channel}://resolve?domain=${l.username}',
-    icon: 'assets/telegram.png',       
-    placeholder: 'Username *',
-    formControl: new FormControl('', [
-      Validators.pattern('[a-zA-Z0-9_-]*')
-    ]),
-    errorType: 'pattern',
-    error: 'Wrong Username'
+    type: "Telegram",
+    channel: "tg",
+    linkFormat: "${l.channel}://resolve?domain=${l.username}",
+    icon: "assets/telegram.png",
+    placeholder: "Username *",
+    formControl: new FormControl("", [Validators.pattern("[a-zA-Z0-9_-]*")]),
+    errorType: "pattern",
+    error: "Wrong Username",
   };
 
   emailLink: Link = {
-    type: 'Email',
-    channel: 'mailto',
-    linkFormat: '${l.channel}:${l.username}',
-    icon: 'assets/email.png',      
-    placeholder: 'Email *',
-    formControl: new FormControl('', [
-      Validators.email
-    ]),
-    errorType: 'email',
-    error: 'Wrong Email'
+    type: "Email",
+    channel: "mailto",
+    linkFormat: "${l.channel}:${l.username}",
+    icon: "assets/email.png",
+    placeholder: "Email *",
+    formControl: new FormControl("", [Validators.email]),
+    errorType: "email",
+    error: "Wrong Email",
   };
 
   phoneLink: Link = {
-    type: 'Phone', 
-    channel: 'tel', 
-    linkFormat: '${l.action}:${l.username}',
-    icon: 'assets/phone.png',      
-    placeholder: 'Phone Number *',
-    formControl: new FormControl('', [
-      Validators.pattern('[+0-9]*')
-    ]),
-    actions: [ 
-      { name: 'Call Me', type: 'tel' },
-      { name: 'SMS Me', type: 'sms' }
+    type: "Phone",
+    channel: "tel",
+    linkFormat: "${l.action}:${l.username}",
+    icon: "assets/phone.png",
+    placeholder: "Phone Number *",
+    formControl: new FormControl("", [Validators.pattern("[+0-9]*")]),
+    actions: [
+      { name: "Call Me", type: "tel" },
+      { name: "SMS Me", type: "sms" },
     ],
-    action: 'tel',
-    errorType: 'pattern',
-    error: 'Wrong Phone Number'  
+    action: "tel",
+    errorType: "pattern",
+    error: "Wrong Phone Number",
   };
 
   get links(): Array<Link> {
@@ -75,9 +66,9 @@ export class LinkResolverService {
   }
 
   private linksHash: object = {};
-  
-  evalLink(l: Link):string {
-    return eval('`' + l.linkFormat + '`');
+
+  evalLink(l: Link): string {
+    return eval("`" + l.linkFormat + "`");
   }
 
   getLink(channel: string, username: string, action?: string): Link {
@@ -92,16 +83,16 @@ export class LinkResolverService {
   }
 
   copyLink(link: string) {
-    let selBox = document.createElement('input');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
+    let selBox = document.createElement("input");
+    selBox.style.position = "fixed";
+    selBox.style.left = "0";
+    selBox.style.top = "0";
+    selBox.style.opacity = "0";
     selBox.value = link;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     document.body.removeChild(selBox);
   }
 
@@ -113,22 +104,22 @@ export class LinkResolverService {
 
   set name(theName: string) {
     this._name = theName;
-    window.localStorage.setItem('name', this.name);
+    window.localStorage.setItem("name", this.name);
   }
 
-  initName():string {
-    this._name = window.localStorage.getItem('name');
-    return this.name || '';
+  initName(): string {
+    this._name = window.localStorage.getItem("name");
+    return this.name || "";
   }
 
-  createAllLinkFromStorage():string {
-    let search = '';
-    this.links.forEach(link => {
+  createAllLinkFromStorage(): string {
+    let search = "";
+    this.links.forEach((link) => {
       let storedData = window.localStorage.getItem(link.channel);
       if (storedData) {
         let storedObj = JSON.parse(storedData);
         if (storedObj.username) {
-          if (search.length) search += '&';
+          if (search.length) search += "&";
           search += `${link.channel}=${encodeURIComponent(storedObj.username)}`;
         }
       }
@@ -142,13 +133,13 @@ export class LinkResolverService {
     return null;
   }
 
-  getParamsFromLocation():object {
+  getParamsFromLocation(): object {
     let search = window.location.search.split(/\&|\?/gm);
     let paramsHash = {};
-    search.forEach(term => {
-      let parts = term.split('=');
-      if (parts && parts.length > 1) {    
-        paramsHash[parts[0]] = decodeURIComponent(parts[1]);   
+    search.forEach((term) => {
+      let parts = term.split("=");
+      if (parts && parts.length > 1) {
+        paramsHash[parts[0]] = decodeURIComponent(parts[1]);
       }
     });
     return paramsHash;
@@ -157,23 +148,27 @@ export class LinkResolverService {
   setAboutHistory(name: string) {
     let date = new Date();
     let key = `about: ${name}`;
-    let value = {date: date, link: window.location.href};
+    let value = { date: date, link: window.location.href };
     window.localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getAboutHistory():Array<any> {
+  getAboutHistory(): Array<any> {
     let aboutStorage = [];
     for (let key in window.localStorage) {
       if (window.localStorage.hasOwnProperty(key)) {
-        if (key.indexOf('about: ') === 0) {
+        if (key.indexOf("about: ") === 0) {
           let value = JSON.parse(localStorage.getItem(key));
-          aboutStorage.push({key: key.substr(6, key.length), date: value.date, link: value.link});
+          aboutStorage.push({
+            key: key.substr(6, key.length),
+            date: value.date,
+            link: value.link,
+          });
         }
       }
     }
 
     aboutStorage.sort((about1, about2) => {
-      let date1= about1.date.toUpperCase();
+      let date1 = about1.date.toUpperCase();
       let date2 = about2.date.toUpperCase();
       if (date1 < date2) return -1;
       if (date1 > date2) return 1;
@@ -192,22 +187,27 @@ export class LinkResolverService {
     return aboutStorage;
   }
 
-  snackBarConfig:object = {
-    duration: 3000, horizontalPosition: 'right', verticalPosition: 'top'
+  snackBarConfig: object = {
+    duration: 3000,
+    horizontalPosition: "right",
+    verticalPosition: "top",
   };
 
-  snackBarAction: string = 'Ok';
+  snackBarAction: string = "Ok";
 
   warn(message: string) {
-    this.snackBar.open(message, this.snackBarAction, { ...this.snackBarConfig, ...{panelClass: 'warn'} });
+    this.snackBar.open(message, this.snackBarAction, {
+      ...this.snackBarConfig,
+      ...{ panelClass: "warn" },
+    });
   }
 
   success(message: string) {
     this.snackBar.open(message, this.snackBarAction, this.snackBarConfig);
-  }  
+  }
 
   constructor(public snackBar: MatSnackBar) {
-    this.links.forEach(link => this.linksHash[link.channel] = link);
+    this.links.forEach((link) => (this.linksHash[link.channel] = link));
   }
 }
 
@@ -215,12 +215,12 @@ export type Link = {
   type: string;
   channel: string;
   linkFormat: string;
-  icon: string;  
+  icon: string;
   placeholder: string;
   action?: string;
-  actions?: Array<Action>
+  actions?: Array<Action>;
   username?: string;
-  link?: string; 
+  link?: string;
   formControl?: FormControl;
   errorType?: string;
   error?: string;

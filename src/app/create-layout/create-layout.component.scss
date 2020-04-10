@@ -1,39 +1,38 @@
 .top-links {
-    display: flex;
-    @media (max-width: 414px) {
-        flex-direction: column;
-    }
+  display: flex;
+  @media (max-width: 414px) {
+    flex-direction: column;
+  }
 
-    input {
-        margin-bottom: 10px;
-        color: #ffffff;
-        font-size: x-large;
-        font-weight: 400;
-        // text-shadow: 2px 2px #333030;
-    }
+  input {
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: x-large;
+    font-weight: 400;
+    // text-shadow: 2px 2px #333030;
+  }
 
-    input.length25 {
-        font-size: larger;
-    }
+  input.length25 {
+    font-size: larger;
+  }
 
-    input.length30 {
-        font-size: large;
-    }
+  input.length30 {
+    font-size: large;
+  }
 
-    input.length35 {
-        font-size: medium;
-    }
+  input.length35 {
+    font-size: medium;
+  }
 
-    input.length40 {
-        font-size: small;
-    }
+  input.length40 {
+    font-size: small;
+  }
 
-    input.length45 {
-        font-size: smaller;
-    }
+  input.length45 {
+    font-size: smaller;
+  }
 
-    .mat-stroked-button {
-        text-shadow: 1px 1px #333030;
-    }
+  .mat-stroked-button {
+    text-shadow: 1px 1px #333030;
+  }
 }
-

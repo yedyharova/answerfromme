@@ -1,27 +1,38 @@
-
 <div class="permanent-header">
   <div class="row-flex">
-      <h1><a href="/">Answer from me</a></h1>
-      <span>|</span>
-      <span>{{ getPathTitle() }}</span>
+    <h1><a href="/">Answer from me</a></h1>
+    <span>|</span>
+    <span>{{ getPathTitle() }}</span>
   </div>
 
   <div>
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <a mat-menu-item *ngIf="path !== 'create'" routerLink="/create" routerLinkActive="active">Create link to your contact channel</a>
-          <!-- <a mat-menu-item routerLink="/skills" routerLinkActive="active">Create link to your skills list</a> -->
-          <button mat-menu-item [matMenuTriggerFor]="aboutHistoryMenu">About History</button>
-          <mat-menu #aboutHistoryMenu="matMenu">
-              <a mat-menu-item [href]="aboutHistoryItem.link" *ngFor="let aboutHistoryItem of aboutHistory">{{ aboutHistoryItem.key }}</a>
-            </mat-menu>
-        </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a
+        mat-menu-item
+        *ngIf="path !== 'create'"
+        routerLink="/create"
+        routerLinkActive="active"
+        >Create link to your contact channel</a
+      >
+      <!-- <a mat-menu-item routerLink="/skills" routerLinkActive="active">Create link to your skills list</a> -->
+      <button mat-menu-item [matMenuTriggerFor]="aboutHistoryMenu">
+        About History
+      </button>
+      <mat-menu #aboutHistoryMenu="matMenu">
+        <a
+          mat-menu-item
+          [href]="aboutHistoryItem.link"
+          *ngFor="let aboutHistoryItem of aboutHistory"
+          >{{ aboutHistoryItem.key }}</a
+        >
+      </mat-menu>
+    </mat-menu>
   </div>
-  
+
   <a href="/help">?</a>
-  
 </div>
 
 <div class="header-info"></div>

@@ -1,23 +1,25 @@
 img {
-    border: solid;
-    width: 300px;
-    cursor: zoom-in;
+  border: solid;
+  width: 300px;
+  cursor: zoom-in;
 }
 
 img.full {
-    width: 100%;
-    cursor: zoom-out;
+  width: 100%;
+  cursor: zoom-out;
 }
 
 mat-panel-title {
-    align-items: center;
-    justify-content: space-between;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .mat-expansion-panel {
-    background: #424242CC;
+  background: #424242cc;
 }
 
-h1>a, h2, h2+h3 {
-    color: #434343;
+h1 > a,
+h2,
+h2 + h3 {
+  color: #434343;
 }

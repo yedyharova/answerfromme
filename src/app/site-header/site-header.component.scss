@@ -1,50 +1,50 @@
 h1 {
-    margin-bottom: 5px;
-    @media (max-width: 414px) {
-        font-size: 24px;
-    }
+  margin-bottom: 5px;
+  @media (max-width: 414px) {
+    font-size: 24px;
+  }
 }
 
 h2 {
-    margin-top: 0;
-    color: #cecece;
+  margin-top: 0;
+  color: #cecece;
 }
 
 .provide-button {
-    float: left;
+  float: left;
 }
 
 .permanent-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
-    background: #424242CC;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background: #424242cc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .permanent-header h1 {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .permanent-header .row-flex span:last-child {
-    font-size: 13px;
-    color: #cecece;
+  font-size: 13px;
+  color: #cecece;
 }
 
-.row-flex>*,
-.permanent-header>* {
-    margin: 0 10px;
+.row-flex > *,
+.permanent-header > * {
+  margin: 0 10px;
 }
 
 .row-flex {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .header-info {
-    margin-top: 20px;
+  margin-top: 20px;
 }

@@ -10,25 +10,47 @@
     <mat-card-content>
       <div class="card-form">
         <mat-form-field>
-            <input matInput type="text" (keyup)="onChange(link)"
-              [placeholder]="link.placeholder" [formControl]="link.formControl"
-              [(ngModel)]="link.username" />
-            <mat-error *ngIf="link.formControl && link.formControl.hasError(link.errorType)">
-                {{ link.error }}
-            </mat-error>
+          <input
+            matInput
+            type="text"
+            (keyup)="onChange(link)"
+            [placeholder]="link.placeholder"
+            [formControl]="link.formControl"
+            [(ngModel)]="link.username"
+          />
+          <mat-error
+            *ngIf="
+              link.formControl && link.formControl.hasError(link.errorType)
+            "
+          >
+            {{ link.error }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field [hidden]="!link.action">
-          <mat-select placeholder="Action"  [(ngModel)]="link.action" (selectionChange)="onChange(link)">
-            <mat-option *ngFor="let action of link.actions" [value]="action.type">
-              {{action.name}}
+          <mat-select
+            placeholder="Action"
+            [(ngModel)]="link.action"
+            (selectionChange)="onChange(link)"
+          >
+            <mat-option
+              *ngFor="let action of link.actions"
+              [value]="action.type"
+            >
+              {{ action.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </mat-card-content>
 
-    <mat-card-actions [hidden]="!link.link || !link.username || (link.formControl && link.formControl.hasError(link.errorType))">
+    <mat-card-actions
+      [hidden]="
+        !link.link ||
+        !link.username ||
+        (link.formControl && link.formControl.hasError(link.errorType))
+      "
+    >
       <button mat-raised-button (click)="tryLink(link)">Preview</button>
       <button mat-raised-button (click)="copyLink(link)">Copy</button>
       <button mat-raised-button (click)="copyHtmlLink(link)">Copy HTML</button>
